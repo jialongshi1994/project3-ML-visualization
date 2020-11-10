@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!--CSS Link-->
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+</head>
+<body>
+<!--Navigation bar-->
+<div class="navigation">
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="https://documenter.getpostman.com/view/10808728/SzS8rjbc#7934d316-f751-4914-9909-39f1901caeb8">Cov19-api</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="world.html">World Data</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="top10.html">Top10 Cov19 Data</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="line.html">trend line charts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="main.html?cty=China">main table</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<!--Left Side Content (Changes for all the pages)-->
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <select id="select" class="form-control">
+                {% for data in dataOption %}
+                    {% if data==cty %}
+                        <option selected>{{ data }}</option>
+                    {% else %}
+                        <option>{{ data }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <br>
+            <div class="row col-md-10">
+                <h3>Random Forest Regressor </h3>
+                <ll>
+                    <li>The model performed well with a score of 98% on the test data</li>
+                    <li>Features were selected based on our intuition that they are correlated with new infections,
+                        feature importance below
+                    </li>
+                    <li>Fo Have high confidence the model is not over fit as the sklearn Random Forest Regressor model
+                        uses ensemble method using 100 separate trees to make a prediction. Further, each tree in the
+                        forest is cross validated using bootstrap methodology.
+                    </li>
+                </ll>
+            </div>
+            <div class="row col-md-10">
+                <h3>Limitations of the Model </h3>
+                <ll>
+                    <li>Possible data issues form under reporting of COVID cases as we have shown in our first
+                        presentation; GDP is correlated to test rate and test rate is correlated to reported infection
+                        rates
+                    </li>
+                    <li>Model may not perform well if too many exogenous factors have changed that are currently not
+                        captured by the features in the model, such as break throughs in medicine, changes in social
+                        behaviour from changing seasons, etc.
+                    </li>
+                    <li>Important to note, model is capturing exponentially increasing COVID numbers, hard to confirm if
+                        model can capture a change in growth rate form positive to negative as the data on decreasing
+                        growth rates is limited. And positive growth rates are exponential and decreasing growth rates
+                        are linear. But the random forest regressor is flexible enough to capture these complicated
+                        relationships
+                    </li>
+                </ll>
+            </div>
+            <div>
+                <h3>link</h3>
+                <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html">https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html</a>
+                <br>
+                <a href="https://wbdata.readthedocs.io/en/latest/">https://wbdata.readthedocs.io/en/latest/</a>
+                <br>
+                <a href="https://data.worldbank.org/">https://data.worldbank.org/</a>
+                <br>
+                <a href="https://www.bsg.ox.ac.uk/sites/default/files/2020-10/BSG-WP-2020-032-v8.pdf">https://www.bsg.ox.ac.uk/sites/default/files/2020-10/BSG-WP-2020-032-v8.pdf</a>
+                <br>
+                <a href="https://covidtracking.com/data/api">https://covidtracking.com/data/api</a>
+                <br>
+                <a href="https://api.covid19api.com/">https://api.covid19api.com/</a>
+                <br>
+                <a href="/static/data2.png">GDP PER</a>
+                <br>
+                <a href="/static/data1.png">Test Rate</a>
+            </div>
+            <table class="table col-md-12" style="width: 100%">
+                <tbody>
+                {% for value in data %}
+                    {% for keyValue in value %}
+                        <tr>
+
+                            <th class="col-md-1 table-th">{{ dataHeader[loop.index-1] }}</th>
+                            <th class="col-md-1 table-th">{{ keyValue }}</th>
+                        </tr>
+                    {% endfor %}
+                {% endfor %}
+
+                </tbody>
+            </table>
+
+
+            </dl>
+
+        </div>
+    </div>
+</div>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="../static/js/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#select").change(function () {
+                window.location.href = "/main.html?cty=" + $("#select").val();
+            }
+        )
+    });
+</script>
+
+</html>
