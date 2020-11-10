@@ -54,19 +54,21 @@
             </select>
             <br>
             <div class="row col-md-10">
-                <h3>Random Forest Regressor </h3>
-                <ll>
-                    <li>The model performed well with a score of 98% on the test data</li>
-                    <li>Features were selected based on our intuition that they are correlated with new infections,
-                        feature importance below
-                    </li>
-                    <li>Fo Have high confidence the model is not over fit as the sklearn Random Forest Regressor model
-                        uses ensemble method using 100 separate trees to make a prediction. Further, each tree in the
-                        forest is cross validated using bootstrap methodology.
-                    </li>
-                </ll>
+                <!-- <h3>Random Forest Regressor </h3> -->
+                <p> Goal: Predict New Cases by Country
+                    
+                    <br>Model: Random Forest Regressor 
+
+                    <br> Score/R2: 98%
+
+                </p>
+                  
+                    
+                    
+                   
+               
             </div>
-            <div class="row col-md-10">
+            <!-- <div class="row col-md-10">
                 <h3>Limitations of the Model </h3>
                 <ll>
                     <li>Possible data issues form under reporting of COVID cases as we have shown in our first
@@ -84,8 +86,8 @@
                         relationships
                     </li>
                 </ll>
-            </div>
-            <div>
+            </div> -->
+            <!-- <div>
                 <h3>link</h3>
                 <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html">https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html</a>
                 <br>
@@ -102,7 +104,7 @@
                 <a href="/static/data2.png">GDP PER</a>
                 <br>
                 <a href="/static/data1.png">Test Rate</a>
-            </div>
+            </div> -->
             <table class="table col-md-12" style="width: 100%">
                 <tbody>
                 {% for value in data %}
